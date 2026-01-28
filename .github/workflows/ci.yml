@@ -37,6 +37,6 @@ jobs:
     - name: 🔍 Import project modules
       run: |
         python - <<EOF
-        from app.streamlit_app import calculate_threshold
+        from streamlit_app import calculate_threshold
         print("Project imports OK")
         EOF
