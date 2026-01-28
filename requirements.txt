@@ -1,9 +1,8 @@
+streamlit>=1.30
+tensorflow==2.13.1
 numpy
 pandas
-requests
 scikit-learn
-tensorflow
-matplotlib
-streamlit
 joblib
+requests
 protobuf==3.20.3
