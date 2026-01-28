@@ -1,8 +1,7 @@
 streamlit>=1.30
-tensorflow-cpu==2.13.1
+tensorflow==2.20.0
 numpy
 pandas
 scikit-learn
 joblib
 requests
-protobuf==3.20.3
