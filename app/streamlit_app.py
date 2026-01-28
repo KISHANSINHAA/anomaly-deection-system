@@ -9,6 +9,29 @@ from preprocessing.sequence_builder import create_sequences
 from anomaly.detector import reconstruction_error
 from anomaly.injector import inject_spike, inject_freeze
 from ingestion.live_weather_source import LiveWeatherSource
+from tensorflow.keras.models import load_model
+import joblib
+import numpy as np
+import os
+import streamlit as st
+
+@st.cache_resource
+def load_live_artifacts():
+    model_path = "model/saved_models/lstm_autoencoder.keras"
+    scaler_path = "model/saved_models/scaler.pkl"
+    threshold_path = "model/saved_models/threshold.npy"
+
+    if not (os.path.exists(model_path) and
+            os.path.exists(scaler_path) and
+            os.path.exists(threshold_path)):
+        st.error("Model artifacts not found. Train model first.")
+        st.stop()
+
+    model = load_model(model_path)
+    scaler = joblib.load(scaler_path)
+    threshold = np.load(threshold_path)
+
+    return model, scaler, threshold
 
 
 # --------------------------------------------------
