@@ -12,9 +12,12 @@ from ingestion.live_weather_source import LiveWeatherSource
 from tensorflow.keras.models import load_model
 import joblib
 import numpy as np
+import sys
 import os
-import streamlit as st
 
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
 @st.cache_resource
 def load_live_artifacts():
     model_path = "model/saved_models/lstm_autoencoder.keras"
