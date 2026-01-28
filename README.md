@@ -1,245 +1,107 @@
-.
+# 🛡️ SentinelGuard – Anomaly Detection System
 
-🛡️ SentinelGuard – Anomaly Detection System
+SentinelGuard is an **end-to-end anomaly detection system** built using an **LSTM Autoencoder** for **time-series data**.
 
-SentinelGuard is an end-to-end anomaly detection system built using an LSTM Autoencoder for time-series data.
-It supports historical analysis, synthetic anomaly testing, and live streaming inference with a real-time dashboard.
+It supports **historical anomaly detection**, **synthetic anomaly simulation**, and **live streaming inference** through an interactive **Streamlit dashboard**.
 
-This project is designed to be production-oriented, interview-defendable, and extensible to domains like:
+This project is designed to be **production-oriented**, **interview-ready**, and **deployment-friendly**.
 
-Weather monitoring
+---
 
-Sensor fault detection
+## 🚀 Why SentinelGuard?
 
-Finance / stock anomalies
+Modern systems generate massive time-series data (weather, sensors, finance, IoT).  
+Traditional rule-based monitoring fails to capture **unknown or evolving anomalies**.
 
-IoT telemetry
+SentinelGuard solves this by learning **normal behavior only** and detecting deviations using **reconstruction error**.
 
-System health monitoring
+---
 
-🚀 Key Features
-✅ Historical Anomaly Detection
+## ✅ Key Design Goals
 
-LSTM Autoencoder trained on historical time-series data
+- ✅ Production-oriented architecture
+- ✅ CDAC / ML interview defendable
+- ✅ Clean modular Python code
+- ✅ Streamlit Cloud compatible
+- ✅ Real-time inference ready
+- ✅ No labeled anomaly data required
 
-Baseline anomaly threshold learned from clean data only
+---
 
-Visualizations:
+## 🧠 Core Technology
 
-Temperature trends
+- **Model**: LSTM Autoencoder  
+- **Learning Type**: Unsupervised  
+- **Input**: Time-series sequences (window size = 24)  
+- **Detection Metric**: Reconstruction Error  
+- **Threshold**: Learned from clean historical data (99.5 percentile)
 
-Reconstruction error
+---
 
-Detected anomalies
+## 🔍 Supported Use Cases
 
-🎭 Synthetic Anomaly Injection (Validation)
+- 🌦️ Weather anomaly detection  
+- 🧪 Sensor fault detection  
+- 📈 Finance / stock anomalies  
+- 📡 IoT telemetry monitoring  
+- 🖥️ System health monitoring  
 
-Injects realistic anomalies:
+---
 
-Sudden spikes
+## ✨ Features
 
-Sensor freeze (flat values)
+### 📊 Historical Anomaly Detection
+- Trains on **clean historical data**
+- Learns baseline behavior
+- Detects anomalies using reconstruction error
 
-Used only for testing, never for training
+### 🎭 Synthetic Anomaly Injection
+- Injects artificial spikes & drops
+- Used for **testing & validation**
+- Disabled in live mode to avoid contamination
 
-Demonstrates detection sensitivity and correctness
+### 📡 Live Streaming Inference
+- Fetches real-time temperature data
+- Uses rolling window inference
+- Detects anomalies **without retraining**
+- Threshold reused from historical training
 
-📡 Live Inference Mode
+### 📈 Visualizations
+- Time-series temperature plot
+- Reconstruction error over time
+- Anomaly markers
+- Threshold visualization
 
-Fetches real-time temperature data using Open-Meteo API
+---
 
-Maintains a rolling window of 24 data points
+## 🗂️ Project Structure
 
-Uses a fixed baseline threshold
-
-No retraining, no threshold drift
-
-📈 Live Rolling Visualization
-
-Rolling temperature graph
-
-Rolling reconstruction error graph
-
-Threshold comparison in real time
-
-🎭 Live Anomaly Simulation
-
-Simulates sensor faults (sudden spikes)
-
-Does not modify model or threshold
-
-Useful for demos and interviews
-
-🔁 CI/CD with GitHub Actions
-
-Dependency installation checks
-
-Environment consistency validation
-
-Import and syntax verification
-
-🧠 Architecture Overview
-Historical Data
-     ↓
-Train LSTM Autoencoder
-     ↓
-Learn Baseline Threshold
-     ↓
----------------------------------
-     ↓
-Live Stream → Scale → Window(24) → Model → Error → Threshold → Alert
-
-🛠️ Tech Stack
-Category	Technology
-ML Model	LSTM Autoencoder (TensorFlow / Keras)
-Backend	Python
-Frontend	Streamlit
-Visualization	Matplotlib
-Data	Open-Meteo API + CSV
-CI/CD	GitHub Actions
-Environment	Conda
-Version Control	Git
-📁 Project Structure
-sentinelguard/
+```text
+anomaly-deection-system/
 │
 ├── app/
-│   └── streamlit_app.py
-│
-├── ingestion/
-│   ├── historical_weather_loader.py
-│   └── live_weather_source.py
+│   └── streamlit_app.py          # Streamlit dashboard entry point
 │
 ├── preprocessing/
-│   ├── data_loader.py
-│   ├── scaler.py
-│   └── sequence_builder.py
+│   ├── data_loader.py            # Load time-series data
+│   ├── scaler.py                 # MinMax scaling
+│   └── sequence_builder.py       # Sliding window creation
 │
-├── anomaly/
-│   ├── detector.py
-│   └── injector.py
+├── ingestion/
+│   ├── historical_loader.py      # Historical dataset loader
+│   └── live_weather_source.py    # Live temperature API source
 │
 ├── model/
-│   ├── train_model.py
+│   ├── train_model.py            # LSTM Autoencoder training
 │   └── saved_models/
+│       └── lstm_autoencoder.keras
 │
-├── data/
-│   └── raw/
-│
-├── .github/
-│   └── workflows/
-│       └── ci.yml
+├── tests/
+│   ├── test_preprocessing.py
+│   ├── test_historical_loader.py
+│   ├── test_anomaly_detection.py
+│   └── test_weather.py
 │
 ├── requirements.txt
-└── README.md
-
-🐍 Conda Environment Setup
-
-This project is developed and tested using a Conda environment.
-
-1️⃣ Create a new Conda environment
-conda create -n sentinelguard python=3.10 -y
-
-2️⃣ Activate the environment
-conda activate sentinelguard
-
-3️⃣ Install dependencies
-pip install -r requirements.txt
-
-4️⃣ Verify installation (optional)
-python - <<EOF
-import tensorflow
-import streamlit
-import numpy
-print("Environment setup successful")
-EOF
-
-5️⃣ Deactivate environment (when done)
-conda deactivate
-
-▶️ Run the Application
-streamlit run app/streamlit_app.py
-
-
-Open in browser:
-
-http://localhost:8501
-
-🧪 How to Use
-🔹 Historical Mode
-
-Select Historical (Training)
-
-Optionally enable Inject Synthetic Anomalies
-
-Observe:
-
-Reconstruction error
-
-Detected anomalies
-
-Summary metrics
-
-🔹 Live Mode
-
-Select Live (Inference)
-
-Click Fetch Next Data Point
-
-Wait for 24 data points (warm-up phase)
-
-Observe real-time inference
-
-Enable 🎭 Simulate Live Anomaly for demo
-
-📊 Thresholding Strategy
-
-Threshold computed using 99.5 percentile of reconstruction error
-
-Learned only from clean historical data
-
-Reused for:
-
-Synthetic testing
-
-Live inference
-
-Prevents:
-
-Data leakage
-
-Adaptive masking
-
-False positives
-
-🎤 Interview-Ready Highlights
-
-Strict separation of training and inference
-
-No retraining during live monitoring
-
-Robust API failure handling
-
-Rolling window enforcement for LSTM
-
-CI pipeline ensures reproducibility
-
-🔮 Future Enhancements
-
-Multivariate anomaly detection
-
-Transformer-based models
-
-Alerting (Email / Slack)
-
-Docker & cloud deployment
-
-Kafka-based streaming
-
-👨‍💻 Contributors
-
-Kishan – ML Engineer
-(CDAC Project – SentinelGuard)
-
-📜 License
-
-This project is intended for educational and research purposes.
+├── README.md
+└── .gitignore
