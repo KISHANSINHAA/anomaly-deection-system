@@ -4,7 +4,7 @@ SentinelGuard is an **end-to-end anomaly detection system** built using an **LST
 
 It supports **historical anomaly detection**, **synthetic anomaly simulation**, and **live streaming inference** through an interactive **Streamlit dashboard**.
 
-This project is designed to be **production-oriented**, **interview-ready**, and **deployment-friendly**.
+This project is designed to be **production-oriented** and **deployment-friendly**.
 
 ---
 
@@ -73,35 +73,3 @@ SentinelGuard solves this by learning **normal behavior only** and detecting dev
 - Threshold visualization
 
 ---
-
-## 🗂️ Project Structure
-
-```text
-anomaly-deection-system/
-│
-├── app/
-│   └── streamlit_app.py          # Streamlit dashboard entry point
-│
-├── preprocessing/
-│   ├── data_loader.py            # Load time-series data
-│   ├── scaler.py                 # MinMax scaling
-│   └── sequence_builder.py       # Sliding window creation
-│
-├── ingestion/
-│   ├── historical_loader.py      # Historical dataset loader
-│   └── live_weather_source.py    # Live temperature API source
-│
-├── model/
-│   ├── train_model.py            # LSTM Autoencoder training
-│   └── saved_models/
-│       └── lstm_autoencoder.keras
-│
-├── tests/
-│   ├── test_preprocessing.py
-│   ├── test_historical_loader.py
-│   ├── test_anomaly_detection.py
-│   └── test_weather.py
-│
-├── requirements.txt
-├── README.md
-└── .gitignore
