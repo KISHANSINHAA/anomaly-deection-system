@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python 3.10
       uses: actions/setup-python@v4
       with:
-        python-version: 3.10
+        python-version: '3.10'
     
     - name: Install dependencies
       run: |
@@ -60,7 +60,7 @@ jobs:
       with:
         app-path: app.py
         requirements-file: requirements.txt
-        python-version: 3.10
+        python-version: '3.10'
       env:
         STREAMLIT_EMAIL: ${{ secrets.STREAMLIT_EMAIL }}
         STREAMLIT_PASSWORD: ${{ secrets.STREAMLIT_PASSWORD }}
