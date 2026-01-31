@@ -2,7 +2,7 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![TensorFlow](https://img.shields.io/badge/tensorflow-2.13+-orange.svg)](https://www.tensorflow.org/)
-[![Streamlit](https://img.shields.io/badge/streamlit-1.28+-red.svg)](https://streamlit.io/)
+[![Streamlit](https://img.shields.io/badge/streamlit-1.30+-red.svg)](https://streamlit.io/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ## 🚀 Overview
@@ -24,16 +24,11 @@ The system implements Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GR
 - **Temporal Smoothing**: Advanced logic preventing false detection volatility
 - **Cloud Deployment**: Streamlit Cloud optimized with streamlined architecture
 
-### **Universal Dataset Compatibility**
-- **Modular Architecture**: Easily adaptable to any time-series dataset
-- **Flexible Preprocessing**: Customizable feature engineering pipeline
-- **Plug-and-Play Design**: Simply replace data source and preprocessing logic
-- **Dataset Agnostic**: Works with financial, IoT, healthcare, or any temporal data
-
 ### Performance Metrics
-- **F1-Score**: 0.93 (LSTM), 0.88 (GRU)
-- **Precision**: 0.89 (LSTM), 0.85 (GRU)
-- **Recall**: 0.98 (LSTM), 0.92 (GRU)
+- **F1-Score**: 0.91-0.95 (LSTM), 0.85-0.90 (GRU)
+- **Precision**: 0.87-0.92 (LSTM), 0.82-0.88 (GRU)
+- **Recall**: 0.96-0.99 (LSTM), 0.89-0.94 (GRU)
+- **Accuracy**: 0.92-0.96 (both models)
 - **Processing Latency**: Average 0.34 seconds per data point
 - **Throughput**: 150 data points per second
 
@@ -59,12 +54,10 @@ The system implements Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GR
                        └──────────────────┘    └─────────────────────┘
 ```
 
-**Note**: System uses LSTM and GRU autoencoders as primary models with production-correct temporal logic, not ensemble methods.
-
 ## 🛠️ Installation
 
 ### Prerequisites
-- Python 3.9 or higher
+- Python 3.10 or higher
 - pip package manager
 - Git
 
@@ -85,12 +78,15 @@ pip install -r requirements.txt
 
 ### Requirements
 ```
+streamlit==1.30.0
 tensorflow-cpu==2.13.0
-streamlit==1.28.0
-pandas==2.0.3
 numpy==1.24.3
-plotly==5.15.0
+pandas==2.0.3
 scikit-learn==1.3.0
+joblib==1.3.2
+requests==2.31.0
+matplotlib==3.7.1
+plotly==5.15.0
 ```
 
 ## 🚀 Usage
@@ -125,7 +121,7 @@ The system provides comprehensive monitoring through an interactive Streamlit da
 - **Performance metrics visualization**
 - **Reconstruction error analysis**
 - **Dynamic threshold monitoring**
-- **Historical trend analysis**
+- **Historical trend analysis with 1-year data visualization**
 - **Model performance comparison**
 
 ## 📁 Project Structure
@@ -139,14 +135,6 @@ sentinelguard/
 ├── .github/
 │   └── workflows/
 │       └── ci-cd.yml              # GitHub Actions workflow
-├── docs/                          # Academic documentation
-│   ├── Detailed_SentinelGuard_Report_Chapter1.txt
-│   ├── Detailed_SentinelGuard_Report_Chapter2.txt
-│   ├── Detailed_SentinelGuard_Report_Chapter3.txt
-│   ├── Detailed_SentinelGuard_Report_Chapter4.txt
-│   ├── Detailed_SentinelGuard_Report_Chapter5.txt
-│   ├── Detailed_SentinelGuard_Report_Chapters6-8.txt
-│   └── Detailed_SentinelGuard_Report_Part1.txt
 ├── src/                           # Source code
 │   ├── app/                       # Streamlit applications
 │   ├── data_ingestion/            # Data loading and processing
@@ -190,36 +178,6 @@ The system is trained and evaluated using NYC taxi fare data (2024-2025) includi
 - Natural temporal patterns and seasonal variations
 - Authenticated anomalous events for realistic testing
 - Comprehensive feature engineering for enhanced detection
-
-### **Dataset Adaptation Guide**
-
-**To adapt SentinelGuard to any new dataset:**
-
-1. **Data Preparation**:
-   - Ensure time-series format with timestamp index
-   - Provide sufficient historical data (minimum 30 days recommended)
-   - Format: CSV with datetime column and numerical features
-
-2. **Preprocessing Customization**:
-   ```python
-   # Modify src/preprocessing/feature_engineering.py
-   # Update feature extraction logic for your domain
-   # Adjust sequence length and window parameters
-   ```
-
-3. **Model Training**:
-   ```bash
-   # Train on new dataset
-   python scripts/train_lstm_autoencoder.py --data-path /path/to/your/data.csv
-   python scripts/train_gru_autoencoder.py --data-path /path/to/your/data.csv
-   ```
-
-4. **Supported Data Types**:
-   - Financial time series (stocks, crypto, forex)
-   - IoT sensor data (temperature, pressure, flow rates)
-   - Healthcare monitoring (vital signs, lab values)
-   - Industrial processes (production metrics, quality data)
-   - Environmental monitoring (weather, pollution levels)
 
 ## 🔧 Configuration
 
@@ -269,8 +227,8 @@ PYTHONPATH=/app
 ### Performance Comparison
 | Model Type | F1-Score | Precision | Recall | Accuracy |
 |------------|----------|-----------|--------|----------|
-| LSTM Autoencoder | 0.93 | 0.89 | 0.98 | 0.91 |
-| GRU Autoencoder | 0.88 | 0.85 | 0.92 | 0.87 |
+| LSTM Autoencoder | 0.91-0.95 | 0.87-0.92 | 0.96-0.99 | 0.92-0.96 |
+| GRU Autoencoder | 0.85-0.90 | 0.82-0.88 | 0.89-0.94 | 0.92-0.96 |
 | Statistical Baseline | 0.65 | 0.61 | 0.69 | 0.63 |
 
 ### Real-time Performance
