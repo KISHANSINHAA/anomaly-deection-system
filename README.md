@@ -7,7 +7,7 @@
 
 ## 🚀 Overview
 
-SentinelGuard is a production-ready real-time anomaly detection system that leverages advanced deep learning autoencoder architectures to identify abnormal patterns in streaming data with exceptional accuracy and minimal false positive rates.
+SentinelGuard is a production-ready real-time anomaly detection system that leverages advanced deep learning autoencoder architectures to identify abnormal patterns in streaming NYC taxi fare data with exceptional accuracy and minimal false positive rates.
 
 The system implements Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) autoencoders with sophisticated dynamic thresholding mechanisms, sequence-to-point anomaly propagation, and temporal smoothing techniques for robust detection performance in production environments.
 
@@ -16,13 +16,13 @@ The system implements Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GR
 ### Advanced Deep Learning Architecture
 - **LSTM Autoencoder**: 128→64→32→16 encoder-decoder architecture optimized for temporal anomaly detection
 - **GRU Autoencoder**: Efficient alternative with faster training and reduced computational requirements
-- **Ensemble Approach**: Combined model voting for enhanced detection accuracy and reliability
+- **Production-Correct Logic**: Window-level confirmation eliminating single-point false positives
 
 ### Production-Ready Capabilities
 - **Real-time Processing**: Sub-second latency with 99.2% system uptime
 - **Dynamic Thresholding**: Adaptive mechanisms that evolve with changing data distributions
-- **Temporal Logic**: Window-level confirmation eliminating false single-point detections
-- **Scalable Deployment**: Cloud-native architecture with horizontal scaling support
+- **Temporal Smoothing**: Advanced logic preventing false detection volatility
+- **Cloud Deployment**: Streamlit Cloud optimized with streamlined architecture
 
 ### Performance Metrics
 - **F1-Score**: 0.93 (LSTM), 0.88 (GRU)
@@ -77,7 +77,7 @@ pip install -r requirements.txt
 
 ### Requirements
 ```
-tensorflow==2.13.0
+tensorflow-cpu==2.13.0
 streamlit==1.28.0
 pandas==2.0.3
 numpy==1.24.3
@@ -119,22 +119,6 @@ The system provides comprehensive monitoring through an interactive Streamlit da
 - **Dynamic threshold monitoring**
 - **Historical trend analysis**
 - **Model performance comparison**
-
-## 🧪 Testing
-
-### Unit Tests
-```bash
-pytest tests/
-```
-
-### Performance Testing
-```bash
-# Run load testing
-python tests/load_test.py
-
-# Run accuracy validation
-python tests/accuracy_test.py
-```
 
 ## 📁 Project Structure
 
@@ -180,7 +164,7 @@ sentinelguard/
 1. **Sequence-to-Point Propagation**: Converts reconstruction errors from sequence-level predictions to accurate point-level classifications
 2. **Temporal Smoothing**: Eliminates isolated false positives while maintaining detection sensitivity
 3. **Dynamic Thresholding**: Adapts to concept drift and evolving data distributions without manual intervention
-4. **Ensemble Voting**: Combines multiple model architectures for enhanced robustness
+4. **Production-Correct Logic**: Prevents single-point anomaly detection through window-level confirmation
 
 ## 📊 Dataset Information
 
@@ -240,19 +224,5 @@ GitHub Actions workflow automates:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📞 Contact
-
-**Sinha Kishan Anilkumar**
-- PRN: 250820528028
-- Email: [your-email@example.com]
-- GitHub: [@KISHANSINHAA](https://github.com/KISHANSINHAA)
-
-## 🙏 Acknowledgments
-
-- CDAC Noida for academic guidance and support
-- Dr. Saruti Gupta (Project Guide) for expert supervision
-- NYC Taxi & Limousine Commission for dataset provision
-- Open-source community for essential tools and frameworks
-
 ---
-*SentinelGuard - Advanced Real-Time Anomaly Detection System*
+*SentinelGuard - Anomaly Detection System*
