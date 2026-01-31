@@ -4,7 +4,6 @@ Factory pattern for creating and managing different types of anomaly detection m
 """
 from typing import Dict, Any, Optional
 from .base_anomaly_detector import BaseModel
-from .isolation_forest_detector import IsolationForestModel
 from .lstm_anomaly_detector import LSTMAutoencoderModel
 from .gru_anomaly_detector import GRUAutoencoderModel
 
@@ -14,7 +13,6 @@ class DetectorFactory:
     
     # Registry of available models
     _models = {
-        'isolation_forest': IsolationForestModel,
         'lstm_autoencoder': LSTMAutoencoderModel,
         'gru_autoencoder': GRUAutoencoderModel
     }
@@ -77,11 +75,6 @@ class DetectorFactory:
             Dictionary with default configuration
         """
         configs = {
-            'isolation_forest': {
-                'n_estimators': 100,
-                'contamination': 0.1,
-                'random_state': 42
-            },
             'lstm_autoencoder': {
                 'sequence_length': 7,
                 'n_features': 10,

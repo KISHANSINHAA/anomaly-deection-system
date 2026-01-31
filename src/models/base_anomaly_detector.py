@@ -156,7 +156,7 @@ class SequenceModel(BaseModel):
 
 
 class PointModel(BaseModel):
-    """Base class for point-based models (Isolation Forest)"""
+    """Base class for point-based models"""
     
     def __init__(self, model_name: str):
         """
