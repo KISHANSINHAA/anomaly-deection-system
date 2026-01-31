@@ -24,6 +24,12 @@ The system implements Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GR
 - **Temporal Smoothing**: Advanced logic preventing false detection volatility
 - **Cloud Deployment**: Streamlit Cloud optimized with streamlined architecture
 
+### **Universal Dataset Compatibility**
+- **Modular Architecture**: Easily adaptable to any time-series dataset
+- **Flexible Preprocessing**: Customizable feature engineering pipeline
+- **Plug-and-Play Design**: Simply replace data source and preprocessing logic
+- **Dataset Agnostic**: Works with financial, IoT, healthcare, or any temporal data
+
 ### Performance Metrics
 - **F1-Score**: 0.93 (LSTM), 0.88 (GRU)
 - **Precision**: 0.89 (LSTM), 0.85 (GRU)
@@ -126,9 +132,21 @@ The system provides comprehensive monitoring through an interactive Streamlit da
 
 ```
 sentinelguard/
-├── app.py                          # Main Streamlit application
+├── app.py                          # Main Streamlet application
 ├── requirements.txt                # Python dependencies
-├── README.md                       # This file
+├── README.md                       # Project documentation
+├── Dockerfile                      # Docker configuration
+├── .github/
+│   └── workflows/
+│       └── ci-cd.yml              # GitHub Actions workflow
+├── docs/                          # Academic documentation
+│   ├── Detailed_SentinelGuard_Report_Chapter1.txt
+│   ├── Detailed_SentinelGuard_Report_Chapter2.txt
+│   ├── Detailed_SentinelGuard_Report_Chapter3.txt
+│   ├── Detailed_SentinelGuard_Report_Chapter4.txt
+│   ├── Detailed_SentinelGuard_Report_Chapter5.txt
+│   ├── Detailed_SentinelGuard_Report_Chapters6-8.txt
+│   └── Detailed_SentinelGuard_Report_Part1.txt
 ├── src/
 │   ├── realtime_anomaly_detection.py  # Real-time detection logic
 │   ├── models/
@@ -146,7 +164,7 @@ sentinelguard/
 ├── models_saved/                      # Trained model storage
 │   ├── lstm/
 │   └── gru/
-└── tests/                             # Test suite
+└── .streamlit/                        # Streamlit configuration
 ```
 
 ## 🎯 Technical Implementation
@@ -175,6 +193,36 @@ The system is trained and evaluated using NYC taxi fare data (2024-2025) includi
 - Natural temporal patterns and seasonal variations
 - Authenticated anomalous events for realistic testing
 - Comprehensive feature engineering for enhanced detection
+
+### **Dataset Adaptation Guide**
+
+**To adapt SentinelGuard to any new dataset:**
+
+1. **Data Preparation**:
+   - Ensure time-series format with timestamp index
+   - Provide sufficient historical data (minimum 30 days recommended)
+   - Format: CSV with datetime column and numerical features
+
+2. **Preprocessing Customization**:
+   ```python
+   # Modify src/preprocessing/feature_engineering.py
+   # Update feature extraction logic for your domain
+   # Adjust sequence length and window parameters
+   ```
+
+3. **Model Training**:
+   ```bash
+   # Train on new dataset
+   python scripts/train_lstm_autoencoder.py --data-path /path/to/your/data.csv
+   python scripts/train_gru_autoencoder.py --data-path /path/to/your/data.csv
+   ```
+
+4. **Supported Data Types**:
+   - Financial time series (stocks, crypto, forex)
+   - IoT sensor data (temperature, pressure, flow rates)
+   - Healthcare monitoring (vital signs, lab values)
+   - Industrial processes (production metrics, quality data)
+   - Environmental monitoring (weather, pollution levels)
 
 ## 🔧 Configuration
 
