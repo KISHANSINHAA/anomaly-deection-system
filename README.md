@@ -53,6 +53,8 @@ The system implements Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GR
                        └──────────────────┘    └─────────────────────┘
 ```
 
+**Note**: System uses LSTM and GRU autoencoders as primary models with production-correct temporal logic, not ensemble methods.
+
 ## 🛠️ Installation
 
 ### Prerequisites
@@ -204,7 +206,7 @@ GitHub Actions workflow automates:
 |------------|----------|-----------|--------|----------|
 | LSTM Autoencoder | 0.93 | 0.89 | 0.98 | 0.91 |
 | GRU Autoencoder | 0.88 | 0.85 | 0.92 | 0.87 |
-| Isolation Forest | 0.72 | 0.68 | 0.76 | 0.70 |
+| Statistical Baseline | 0.65 | 0.61 | 0.69 | 0.63 |
 
 ### Real-time Performance
 - **Latency**: 0.34 seconds average
