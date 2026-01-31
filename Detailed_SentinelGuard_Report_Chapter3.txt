@@ -1,0 +1,294 @@
+CHAPTER 3: SYSTEM REQUIREMENTS AND FEASIBILITY ANALYSIS
+
+3.1 FUNCTIONAL REQUIREMENTS
+
+The functional requirements define the specific capabilities and behaviors that the SentinelGuard system must provide to meet user needs and operational objectives. These requirements are organized according to stakeholder perspectives and system functionalities.
+
+Data Ingestion Requirements:
+FR-001: The system shall continuously ingest streaming NYC taxi fare data from designated APIs with guaranteed data delivery and minimal loss.
+FR-002: The system shall validate incoming data for format compliance, range checking, and completeness before processing.
+FR-003: The system shall handle missing data values through appropriate interpolation or gap-filling mechanisms without disrupting continuous operation.
+FR-004: The system shall support configurable data sampling rates to balance processing load with detection timeliness requirements.
+
+Preprocessing Requirements:
+FR-005: The system shall transform raw fare data into standardized temporal sequences suitable for deep learning model consumption.
+FR-006: The system shall extract relevant temporal features including moving averages, volatility measures, and seasonal indicators.
+FR-007: The system shall normalize data values to consistent scales while preserving meaningful magnitude relationships.
+FR-008: The system shall maintain sliding windows of historical data to provide temporal context for sequence-based processing.
+
+Model Processing Requirements:
+FR-009: The system shall implement LSTM autoencoder architecture with configurable hyperparameters for temporal anomaly detection.
+FR-010: The system shall implement GRU autoencoder architecture as alternative approach with comparable performance characteristics.
+FR-011: The system shall compute reconstruction errors for input sequences using trained autoencoder models.
+FR-012: The system shall support model versioning and rollback capabilities for production deployment scenarios.
+
+Decision Logic Requirements:
+FR-013: The system shall implement dynamic thresholding mechanisms that adapt to changing reconstruction error distributions.
+FR-014: The system shall apply sequence-to-point anomaly propagation to convert sequence-level predictions to point-level classifications.
+FR-015: The system shall incorporate temporal smoothing logic to eliminate isolated false positive detections.
+FR-016: The system shall provide configurable sensitivity settings to balance detection rate with false positive rate according to operational requirements.
+
+Alerting and Notification Requirements:
+FR-017: The system shall generate real-time alerts for detected anomalies through multiple notification channels.
+FR-018: The system shall include anomaly severity scoring based on reconstruction error magnitude and temporal persistence.
+FR-019: The system shall provide configurable alert routing based on anomaly type, severity, and operational context.
+FR-020: The system shall maintain alert history and suppression logic to prevent notification flooding during sustained anomalous periods.
+
+Monitoring and Visualization Requirements:
+FR-021: The system shall provide real-time dashboards displaying current detection status, system performance metrics, and alert summaries.
+FR-022: The system shall enable historical analysis of detection performance, false positive rates, and model accuracy trends.
+FR-023: The system shall visualize reconstruction error patterns, threshold adjustments, and anomaly characteristics for investigative purposes.
+FR-024: The system shall support customizable reporting capabilities for operational reviews and compliance documentation.
+
+Configuration Management Requirements:
+FR-025: The system shall provide centralized configuration management for all operational parameters and thresholds.
+FR-026: The system shall support runtime configuration updates without requiring service restarts or downtime.
+FR-027: The system shall maintain configuration version history and enable rollback to previous settings when needed.
+FR-028: The system shall validate configuration changes for consistency and prevent invalid parameter combinations.
+
+Table 3.1: Functional Requirements Specification Matrix
+
+Requirement ID    Category           Priority    Description                                                  Verification Method
+FR-001          Data Ingestion     Critical    Continuous streaming data ingestion                          Integration testing
+FR-002          Data Ingestion     High        Data validation and quality checking                         Unit testing
+FR-003          Data Ingestion     Medium      Missing data handling mechanisms                             System testing
+FR-004          Data Ingestion     Low         Configurable sampling rates                                  Performance testing
+FR-005          Preprocessing      Critical    Sequence transformation for deep learning                    Integration testing
+FR-006          Preprocessing      High        Temporal feature extraction                                  Unit testing
+FR-007          Preprocessing      High        Data normalization procedures                                System testing
+FR-008          Preprocessing      Medium      Sliding window maintenance                                   Performance testing
+FR-009          Model Processing   Critical    LSTM autoencoder implementation                              Integration testing
+FR-010          Model Processing   High        GRU autoencoder implementation                               Unit testing
+FR-011          Model Processing   Critical    Reconstruction error computation                             System testing
+FR-012          Model Processing   Medium      Model versioning capabilities                                Performance testing
+FR-013          Decision Logic     Critical    Dynamic thresholding mechanisms                              Integration testing
+FR-014          Decision Logic     High        Sequence-to-point propagation                                Unit testing
+FR-015          Decision Logic     High        Temporal smoothing algorithms                                System testing
+FR-016          Decision Logic     Medium      Configurable sensitivity settings                            Performance testing
+FR-017          Alerting           High        Real-time alert generation                                   Integration testing
+FR-018          Alerting           Medium      Anomaly severity scoring                                     Unit testing
+FR-019          Alerting           Low         Configurable alert routing                                   System testing
+FR-020          Alerting           Low         Alert history and suppression                                Performance testing
+FR-021          Monitoring         High        Real-time dashboard capabilities                             Integration testing
+FR-022          Monitoring         Medium      Historical analysis features                                 Unit testing
+FR-023          Monitoring         Medium      Visualization and investigative tools                        System testing
+FR-024          Monitoring         Low         Customizable reporting                                       Performance testing
+FR-025          Configuration      High        Centralized configuration management                         Integration testing
+FR-026          Configuration      Medium      Runtime configuration updates                                Unit testing
+FR-027          Configuration      Low         Configuration version history                                System testing
+FR-028          Configuration      Low         Configuration validation                                     Performance testing
+
+3.2 NON-FUNCTIONAL REQUIREMENTS
+
+Performance Requirements:
+NFR-001: The system shall process incoming data points with average latency not exceeding 500 milliseconds under normal operating conditions.
+NFR-002: The system shall maintain 99.5% uptime availability during continuous 30-day operation periods.
+NFR-003: The system shall support processing throughput of at least 100 data points per second without performance degradation.
+NFR-004: The system shall achieve memory utilization not exceeding 4GB RAM under peak load conditions.
+
+Scalability Requirements:
+NFR-005: The system shall scale horizontally to handle increased data volumes through distributed processing capabilities.
+NFR-006: The system shall support dynamic resource allocation based on current processing demands and system load.
+NFR-007: The system shall maintain consistent performance characteristics when processing data from multiple concurrent sources.
+NFR-008: The system shall enable seamless addition of new data sources without requiring system reconfiguration or downtime.
+
+Reliability Requirements:
+NFR-009: The system shall implement robust error handling for data quality issues, network interruptions, and component failures.
+NFR-010: The system shall provide automatic failover capabilities with minimal service disruption during component failures.
+NFR-011: The system shall maintain data integrity and consistency across all processing stages and storage components.
+NFR-012: The system shall implement comprehensive logging and monitoring for troubleshooting and performance analysis.
+
+Security Requirements:
+NFR-013: The system shall implement secure authentication and authorization mechanisms for user access and system administration.
+NFR-014: The system shall encrypt sensitive data both in transit and at rest using industry-standard cryptographic protocols.
+NFR-015: The system shall implement audit logging for all system access, configuration changes, and operational activities.
+NFR-016: The system shall comply with relevant data protection regulations and privacy requirements for handling sensitive information.
+
+Maintainability Requirements:
+NFR-017: The system shall provide modular architecture enabling component-level updates and maintenance without system-wide disruptions.
+NFR-018: The system shall include comprehensive diagnostic tools and health monitoring capabilities for proactive maintenance.
+NFR-019: The system shall maintain backward compatibility for configuration files and data formats across version upgrades.
+NFR-020: The system shall provide detailed documentation for installation, configuration, operation, and troubleshooting procedures.
+
+Usability Requirements:
+NFR-021: The system shall provide intuitive user interface with minimal learning curve for operational personnel.
+NFR-022: The system shall offer responsive performance for interactive dashboard operations and real-time monitoring activities.
+NFR-023: The system shall support role-based access control with appropriate permission levels for different user types.
+NFR-024: The system shall provide comprehensive help documentation and contextual guidance for system features and operations.
+
+Compatibility Requirements:
+NFR-025: The system shall operate on standard Linux distributions including Ubuntu 18.04+, CentOS 7+, and Red Hat Enterprise Linux 7+.
+NFR-026: The system shall support integration with common monitoring and alerting systems through standard APIs and protocols.
+NFR-027: The system shall maintain compatibility with existing data storage systems and database platforms.
+NFR-028: The system shall support standard networking protocols and security mechanisms for enterprise deployment environments.
+
+Table 3.2: Non-Functional Requirements and Metrics
+
+Requirement ID    Category        Metric                           Target Value        Measurement Method
+NFR-001          Performance     Average Processing Latency       ≤ 500 ms            Load testing
+NFR-002          Reliability     System Availability              ≥ 99.5%             Uptime monitoring
+NFR-003          Performance     Throughput Capacity              ≥ 100 pts/sec       Stress testing
+NFR-004          Performance     Memory Utilization               ≤ 4 GB              Resource monitoring
+NFR-005          Scalability     Horizontal Scaling Factor        10x capacity        Scale testing
+NFR-006          Scalability     Dynamic Resource Allocation      Automatic           Performance testing
+NFR-007          Scalability     Concurrent Sources Supported     ≥ 10 sources        Load testing
+NFR-008          Scalability     New Source Integration Time      ≤ 5 minutes         Deployment testing
+NFR-009          Reliability     Error Handling Coverage          ≥ 99% scenarios     Fault injection testing
+NFR-010          Reliability     Failover Recovery Time           ≤ 30 seconds        Failover testing
+NFR-011          Reliability     Data Integrity Assurance         100% consistency    Data validation testing
+NFR-012          Reliability     Log Completeness                 ≥ 99.9% events      Log analysis
+NFR-013          Security        Authentication Strength          Multi-factor         Security testing
+NFR-014          Security        Encryption Standards             AES-256             Compliance testing
+NFR-015          Security        Audit Trail Completeness         100% actions        Audit verification
+NFR-016          Security        Regulatory Compliance            GDPR, HIPAA          Compliance auditing
+NFR-017          Maintainability Modular Independence             ≥ 80% components    Architecture review
+NFR-018          Maintainability Diagnostic Coverage              ≥ 95% issues         Diagnostic testing
+NFR-019          Maintainability Backward Compatibility           100% versions        Regression testing
+NFR-020          Maintainability Documentation Completeness       ≥ 95% features       Documentation review
+NFR-021          Usability       User Task Completion Rate        ≥ 90% success        User testing
+NFR-022          Usability       Interface Response Time          ≤ 2 seconds          Performance testing
+NFR-023          Usability       Role-based Access Coverage       100% permissions     Security testing
+NFR-024          Usability       Help Documentation Coverage      ≥ 95% features       Documentation review
+NFR-025          Compatibility   OS Support Coverage              3 major distros      Compatibility testing
+NFR-026          Compatibility   Integration API Support          Standard protocols   Integration testing
+NFR-027          Compatibility   Database Compatibility           3 major systems      Compatibility testing
+NFR-028          Compatibility   Network Protocol Support         Standard protocols   Network testing
+
+3.3 TECHNICAL FEASIBILITY ASSESSMENT
+
+Technology Maturity Evaluation:
+The technical feasibility assessment examines the maturity and readiness of core technologies for production implementation. Deep learning frameworks like TensorFlow and PyTorch have reached considerable maturity with extensive documentation, community support, and enterprise adoption. LSTM and GRU architectures have been extensively validated for time-series applications with numerous successful deployments across industries.
+
+Cloud computing platforms including AWS, Google Cloud, and Microsoft Azure provide robust infrastructure services with proven scalability, reliability, and security capabilities. Containerization technologies like Docker and Kubernetes enable consistent deployment across development, testing, and production environments while facilitating horizontal scaling and resource optimization.
+
+Stream processing frameworks such as Apache Kafka, Apache Storm, and Apache Flink have demonstrated production readiness for handling massive data streams with guaranteed delivery, fault tolerance, and exactly-once processing semantics. These technologies provide solid foundation components for building reliable real-time processing systems.
+
+Development Team Capabilities:
+The implementation team possesses strong expertise in machine learning, deep learning, and software engineering with proven experience in Python development, TensorFlow framework usage, and cloud deployment architectures. Previous projects involving time-series analysis, real-time data processing, and web application development provide relevant experience for this research.
+
+Access to computational resources including GPU-enabled development environments and cloud computing credits ensures adequate capacity for model training, experimentation, and performance testing. Collaboration with domain experts familiar with NYC taxi operations and anomaly detection requirements provides valuable insights for system design and evaluation.
+
+Risk Mitigation Strategies:
+Several risk factors require proactive mitigation strategies to ensure successful project completion. Technology risks include potential performance bottlenecks, integration challenges with streaming data sources, and model training instability. These risks are addressed through iterative development approaches, comprehensive testing protocols, and fallback mechanisms using proven alternative approaches.
+
+Resource risks involve computational requirements for model training and real-time processing, which are mitigated through cloud-based elastic scaling, model optimization techniques, and efficient algorithm implementations. Timeline risks associated with complex technical challenges are managed through phased development approach with regular milestone reviews and adaptive planning.
+
+Table 3.3: Technical Feasibility Assessment Criteria and Scores
+
+Assessment Criteria                    Rating Scale (1-5)    Current Score    Comments
+Technology Maturity                    1=Poor, 5=Excellent    4.5              Well-established frameworks and tools
+Team Expertise                         1=Novice, 5=Expert     4.0              Strong ML/AI and software engineering skills
+Infrastructure Availability            1=Limited, 5=Abundant  4.5              Excellent cloud and computational resources
+Development Tools Quality              1=Basic, 5=Advanced    4.5              Mature ecosystems with extensive support
+Integration Complexity                 1=Simple, 5=Complex    3.0              Moderate complexity with available solutions
+Performance Requirements Feasibility   1=Difficult, 5=Easy    3.5              Challenging but achievable with optimization
+Scalability Potential                  1=Limited, 5=Excellent 4.0              Good horizontal scaling capabilities
+Maintenance and Support                1=Poor, 5=Excellent    4.0              Strong community and vendor support
+Security Implementation                1=Basic, 5=Robust      3.5              Standard practices with room for enhancement
+Documentation Availability             1=Minimal, 5=Complete  4.0              Comprehensive resources and tutorials
+
+Overall Technical Feasibility Score: 3.9/5.0 (Feasible with manageable risks)
+
+3.4 ECONOMIC VIABILITY ANALYSIS
+
+Cost Structure Analysis:
+Development costs primarily involve personnel expenses for research, development, and testing activities over the project timeline. Software licensing costs are minimized through use of open-source technologies including Python, TensorFlow, and Streamlit, eliminating significant upfront licensing expenses while providing enterprise-grade capabilities.
+
+Computational resources for model training and experimentation utilize cloud computing credits and existing institutional infrastructure, reducing capital expenditure requirements. Third-party services for data acquisition and API access represent minimal ongoing operational costs that scale with usage rather than requiring substantial upfront investments.
+
+Personnel Costs:
+• Lead Researcher/Developer: 6 months @ $8,000/month = $48,000
+• Machine Learning Engineer: 4 months @ $7,000/month = $28,000
+• Data Scientist: 3 months @ $6,500/month = $19,500
+• System Administrator: 2 months @ $5,500/month = $11,000
+• Project Management: 3 months @ $6,000/month = $18,000
+
+Infrastructure and Tools:
+• Cloud Computing Credits: $5,000 (development and testing)
+• Development Software Licenses: $0 (open-source tools)
+• Hardware/Equipment: $3,000 (specialized components)
+• Data Acquisition Services: $2,000 (API access and datasets)
+
+Total Development Investment: $124,500
+
+Revenue and Benefit Projections:
+Organizations typically realize substantial returns from effective anomaly detection systems through fraud prevention, operational efficiency gains, and risk mitigation. Conservative estimates suggest 5-15x return on investment within the first year of deployment for enterprise applications.
+
+Financial institutions save millions annually through early fraud detection, while industrial facilities avoid costly equipment failures and production downtime. Insurance companies reduce claims through proactive risk identification, and e-commerce platforms prevent revenue losses from abusive activities.
+
+Market Opportunity Analysis:
+The global anomaly detection market presents significant commercial opportunities with projected growth from $2.2 billion in 2020 to $10.3 billion by 2026. The transportation and logistics sector represents particularly strong potential given massive transaction volumes and fraud exposure in ride-sharing, freight, and delivery services.
+
+North American markets show steady growth with increasing regulatory compliance requirements driving adoption, while Asia-Pacific regions demonstrate rapid expansion fueled by digital transformation initiatives and IoT proliferation. Real-time systems now constitute 68% of the market, reflecting critical importance of immediate detection capabilities.
+
+Table 3.4: Cost-Benefit Analysis and ROI Projections
+
+Investment Category           Year 1 Cost    Year 2 Cost    Year 3 Cost    Cumulative Cost
+Development Investment        $124,500       $0             $0             $124,500
+Operational Expenses          $15,000        $18,000        $22,000        $55,000
+Maintenance and Support       $8,000         $12,000        $15,000        $35,000
+Total Investment              $147,500       $30,000        $37,000        $214,500
+
+Benefit Category              Year 1 Benefit  Year 2 Benefit  Year 3 Benefit  Cumulative Benefit
+Fraud Prevention Savings      $480,000        $620,000       $780,000       $1,880,000
+Operational Efficiency Gains  $150,000        $210,000       $280,000       $640,000
+Risk Mitigation Value         $95,000         $135,000       $180,000       $410,000
+Compliance Cost Reduction     $35,000         $45,000        $55,000        $135,000
+Total Benefits                $760,000        $1,010,000     $1,305,000     $3,075,000
+
+Net Present Value (NPV): $2,860,500 (assuming 10% discount rate)
+Return on Investment (ROI): 515% over three years
+Payback Period: 2.3 months
+
+3.5 RISK ASSESSMENT AND MITIGATION STRATEGIES
+
+Technical Risks:
+TR-001: Model Training Instability - Risk of convergence issues or poor performance during autoencoder training
+Mitigation: Implement multiple initialization strategies, early stopping mechanisms, and comprehensive validation protocols. Maintain baseline statistical approaches as fallback options.
+
+TR-002: Real-time Performance Degradation - Risk of processing latency exceeding requirements under load conditions
+Mitigation: Optimize model architectures for inference efficiency, implement caching strategies, and design horizontal scaling capabilities. Conduct extensive load testing and performance profiling.
+
+TR-003: Data Quality and Integration Issues - Risk of data source disruptions or format changes affecting system operation
+Mitigation: Implement robust data validation, error handling, and graceful degradation mechanisms. Design flexible data ingestion pipelines with support for multiple formats and sources.
+
+TR-004: Concept Drift Adaptation Failure - Risk of detection performance degradation due to changing normal behavior patterns
+Mitigation: Implement continuous monitoring of model performance metrics, automatic retraining triggers, and adaptive thresholding mechanisms. Design feedback loops for manual intervention when needed.
+
+Operational Risks:
+OR-001: User Adoption and Training Challenges - Risk of operational personnel struggling with new system interfaces and workflows
+Mitigation: Develop comprehensive user training programs, intuitive interface designs, and gradual rollout strategies. Provide extensive documentation and ongoing support during transition period.
+
+OR-002: False Positive Fatigue - Risk of system generating excessive alerts leading to operator desensitization
+Mitigation: Implement sophisticated alert prioritization, temporal smoothing, and configurable sensitivity settings. Design feedback mechanisms for continuous threshold optimization based on operator input.
+
+OR-003: Integration Complexity - Risk of difficulties integrating with existing monitoring and alerting systems
+Mitigation: Design modular architecture with standard API interfaces, comprehensive adapter libraries, and flexible deployment options. Conduct thorough integration testing with target environments.
+
+Market and Strategic Risks:
+MR-001: Competitive Technology Emergence - Risk of superior approaches emerging that could obsolete current implementation
+Mitigation: Maintain awareness of research developments, design extensible architecture for incorporating new techniques, and establish partnerships with academic institutions for ongoing innovation.
+
+MR-002: Regulatory Compliance Changes - Risk of evolving data protection or operational requirements affecting system viability
+Mitigation: Implement privacy-by-design principles, maintain compliance monitoring, and design flexible architecture accommodating regulatory updates without major rework.
+
+MR-003: Market Timing Misalignment - Risk of deployment timing not aligning with optimal market conditions or customer readiness
+Mitigation: Conduct market research and pilot deployments, maintain flexible roadmap, and develop phased rollout strategies based on market feedback and adoption patterns.
+
+Table 3.5: Risk Assessment Matrix with Mitigation Strategies
+
+Risk ID    Category    Probability    Impact    Risk Score    Mitigation Strategy                                Status
+TR-001     Technical   Medium         High      15           Multiple training approaches, fallback methods         Planned
+TR-002     Technical   Low            High      10           Performance optimization, load testing, scaling        Implemented
+TR-003     Technical   Medium         Medium    12           Robust validation, error handling, flexibility         Designed
+TR-004     Technical   Medium         High      15           Continuous monitoring, adaptive mechanisms             Implemented
+OR-001     Operational Low            Medium    6            Training programs, intuitive design, gradual rollout   Planned
+OR-002     Operational Medium         High      15           Alert prioritization, smoothing, configurability       Implemented
+OR-003     Operational Medium         Medium    12           Modular design, standard APIs, integration testing     Designed
+MR-001     Market      Low            High      10           Technology awareness, extensible architecture          Ongoing
+MR-002     Market      Low            Medium    6            Privacy design, compliance monitoring, flexibility     Implemented
+MR-003     Market      Medium         Medium    12           Market research, pilot deployments, flexible roadmap   Planned
+
+Overall Risk Profile: Moderate (Average Risk Score: 11.3/25)
+Primary Concerns: Model training stability, concept drift adaptation, and false positive management
+Mitigation Confidence: High for implemented strategies, Medium for planned approaches
