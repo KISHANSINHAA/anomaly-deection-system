@@ -132,7 +132,7 @@ The system provides comprehensive monitoring through an interactive Streamlit da
 
 ```
 sentinelguard/
-├── app.py                          # Main Streamlet application
+├── app.py                          # Main Streamlit application
 ├── requirements.txt                # Python dependencies
 ├── README.md                       # Project documentation
 ├── Dockerfile                      # Docker configuration
@@ -147,24 +147,21 @@ sentinelguard/
 │   ├── Detailed_SentinelGuard_Report_Chapter5.txt
 │   ├── Detailed_SentinelGuard_Report_Chapters6-8.txt
 │   └── Detailed_SentinelGuard_Report_Part1.txt
-├── src/
-│   ├── realtime_anomaly_detection.py  # Real-time detection logic
-│   ├── models/
-│   │   ├── lstm_autoencoder.py        # LSTM model architecture
-│   │   └── gru_autoencoder.py         # GRU model architecture
-│   ├── preprocessing/
-│   │   └── feature_engineering.py     # Data preprocessing
-│   └── thresholding/
-│       └── dynamic_threshold_calculator.py
-├── scripts/
-│   ├── train_lstm_autoencoder.py      # LSTM training script
-│   └── train_gru_autoencoder.py       # GRU training script
-├── data/
-│   └── nyc_taxi/                      # NYC taxi fare data
-├── models_saved/                      # Trained model storage
+├── src/                           # Source code
+│   ├── app/                       # Streamlit applications
+│   ├── data_ingestion/            # Data loading and processing
+│   ├── models/                    # Model architectures
+│   ├── preprocessing/             # Feature engineering
+│   └── thresholding/              # Dynamic thresholding
+├── scripts/                       # Training scripts
+│   ├── train_lstm_autoencoder.py  # LSTM training
+│   └── train_gru_autoencoder.py   # GRU training
+├── data/                          # Data storage
+│   └── nyc_taxi/                  # NYC taxi fare data
+├── models_saved/                  # Trained models
 │   ├── lstm/
 │   └── gru/
-└── .streamlit/                        # Streamlit configuration
+└── .streamlit/                    # Streamlit configuration
 ```
 
 ## 🎯 Technical Implementation
