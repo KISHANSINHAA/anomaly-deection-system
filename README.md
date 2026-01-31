@@ -231,18 +231,38 @@ Key configuration parameters can be adjusted in the dashboard:
 
 ## 🚀 Deployment
 
-### Cloud Deployment
-The system supports deployment on major cloud platforms:
-- **Streamlit Cloud**: Direct deployment with minimal configuration
-- **AWS/GCP/Azure**: Containerized deployment with Kubernetes orchestration
-- **Docker**: Containerized deployment for consistent environments
+### Cloud Deployment Options
+
+**Streamlit Cloud (Recommended)**:
+1. Go to [Streamlit Cloud](https://streamlit.io/cloud)
+2. Sign in with your GitHub account
+3. Click "New app"
+4. Select this repository
+5. Set:
+   - Main file: `app.py`
+   - Python version: 3.10
+   - Requirements file: `requirements.txt`
+6. Click "Deploy"
+
+**Manual Deployment**:
+```bash
+# Deploy to any cloud platform
+streamlit run app.py --server.port=8501
+```
 
 ### CI/CD Pipeline
 GitHub Actions workflow automates:
 - Code testing and validation
-- Model performance verification
-- Deployment to staging environments
-- Production release management
+- Docker image building
+- Release management
+- Automated versioning
+
+### Environment Variables
+For production deployment, set:
+```bash
+STREAMLIT_SERVER_PORT=8501
+PYTHONPATH=/app
+```
 
 ## 📈 Results and Benchmarks
 

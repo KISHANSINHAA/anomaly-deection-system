@@ -47,26 +47,8 @@ jobs:
         docker stop test-container
         docker rm test-container
 
-  deploy:
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    
-    steps:
-    - uses: actions/checkout@v3
-    
-    - name: Deploy to Streamlit Cloud
-      uses: streamlit/streamlit-app-deploy@v1
-      with:
-        app-path: app.py
-        requirements-file: requirements.txt
-        python-version: '3.10'
-      env:
-        STREAMLIT_EMAIL: ${{ secrets.STREAMLIT_EMAIL }}
-        STREAMLIT_PASSWORD: ${{ secrets.STREAMLIT_PASSWORD }}
-
   release:
-    needs: deploy
+    needs: build-and-test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     
@@ -89,6 +71,7 @@ jobs:
           - Updated to Python 3.10
           - Fixed CI/CD pipeline configuration
           - Enhanced Docker image build
+          - Removed invalid Streamlit deploy action
           
           ### Performance
           - F1-Score: 0.93 (LSTM)
