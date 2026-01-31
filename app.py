@@ -153,7 +153,7 @@ if __name__ == "__main__":
         """)
         
         st.markdown("### 🚀 Real-time Anomaly Detection")
-        st.success("✅ **NEW FEATURE**: Continuous monitoring of incoming data points")
+        st.success("✅ Continuous monitoring of incoming data points")
         
         col1, col2, col3 = st.columns(3)
         with col1:
@@ -175,6 +175,12 @@ if __name__ == "__main__":
         # Real-time detection results section
         st.markdown("### 🎯 Real-time Detection Results")
         
+        # Initialize session state variables
+        if 'detection_results' not in st.session_state:
+            st.session_state.detection_results = []
+        if 'anomaly_count' not in st.session_state:
+            st.session_state.anomaly_count = 0
+        
         # Button to simulate new detections with dynamic values
         if st.button("🎯 Run Production-Correct Detection Demo", key="demo_button_1"):
             # Generate dynamic simulation results
@@ -184,7 +190,7 @@ if __name__ == "__main__":
             st.success("✅ Production-correct detection simulation completed with dynamic values!")
         
         # Display results if available
-        if 'detection_results' in st.session_state and st.session_state.detection_results:
+        if st.session_state.detection_results:
             st.markdown("#### 📊 Production-Correct Detection Results")
             
             # Convert to DataFrame for better display
@@ -193,17 +199,15 @@ if __name__ == "__main__":
             # Display as table
             st.dataframe(df_results, use_container_width=True, hide_index=True)
             
-            # Summary statistics with dynamic values
+            # Summary statistics with dynamic values (removed Anomaly Rate)
             total_detections = len(st.session_state.detection_results)
             anomalies_found = st.session_state.anomaly_count
             
-            col1, col2, col3 = st.columns(3)
+            col1, col2 = st.columns(2)
             with col1:
                 st.metric("Total Detections", total_detections)
             with col2:
                 st.metric("Anomalies Found", anomalies_found)
-            with col3:
-                st.metric("Detection Rate", f"{(anomalies_found/total_detections)*100:.1f}%")
 
     with tab2:
         st.markdown("### 🔍 Pure Data Analysis Results")
@@ -212,18 +216,17 @@ if __name__ == "__main__":
         # Get dynamic results
         dynamic_results = get_pure_data_results()
         
-        # Sample results data with dynamic values
+        # Sample results data with dynamic values (removed Anomaly Rate column)
         results_data = {
-            'Metric': ['Total Data Points', 'Anomalies Detected', 'Anomaly Rate', 'F1-Score', 'Precision', 'Recall'],
+            'Metric': ['Total Data Points', 'Anomalies Detected', 'F1-Score', 'Precision', 'Recall'],
             'Value': [
                 dynamic_results['Total Data Points'],
                 dynamic_results['Anomalies Detected'], 
-                dynamic_results['Anomaly Rate'],
                 dynamic_results['F1-Score'],
                 dynamic_results['Precision'],
                 dynamic_results['Recall']
             ],
-            'Status': ['✅', '✅', '✅', '✅', '✅', '✅']
+            'Status': ['✅', '✅', '✅', '✅', '✅']
         }
         
         df_results = pd.DataFrame(results_data)
