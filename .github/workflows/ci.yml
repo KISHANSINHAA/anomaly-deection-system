@@ -1,0 +1,39 @@
+name: SentinelGuard CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install numpy pandas matplotlib plotly streamlit tensorflow yfinance
+
+    - name: Verify project structure
+      run: |
+        test -f app.py
+        test -d src/models
+        test -d src/data_ingestion
+        test -d src/preprocessing
+
+    - name: Smoke test (imports)
+      run: |
+        python - <<EOF
+        import numpy, pandas, tensorflow
+        print("Imports OK")
+        EOF
