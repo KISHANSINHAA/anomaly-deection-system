@@ -1,7 +1,7 @@
 <!-- Enhanced README Template -->
 <!-- Created by Qoder -->
 
-# 🚨 SentinelGuard – Time-Series Anomaly Detection System
+# 🚨 SentinelGuard – Anomaly Detection System
 
 SentinelGuard is an end-to-end, production-ready time-series anomaly detection system built using deep learning autoencoders.
 It detects abnormal patterns in historical financial data using unsupervised learning, dynamic thresholding, and interactive visualization.
