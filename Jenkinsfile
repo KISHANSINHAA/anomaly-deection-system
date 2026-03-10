@@ -17,9 +17,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                script {
-                    sh "docker build -t ${DOCKERHUB_USER}/${IMAGE_NAME}:latest ."
-                }
+                bat "docker build -t %DOCKERHUB_USER%/%IMAGE_NAME%:latest ."
             }
         }
 
@@ -30,29 +28,24 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
-                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                    bat "echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin"
                 }
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                script {
-                    sh "docker push ${DOCKERHUB_USER}/${IMAGE_NAME}:latest"
-                }
+                bat "docker push %DOCKERHUB_USER%/%IMAGE_NAME%:latest"
             }
         }
 
         stage('Deploy Container') {
             steps {
-                script {
-                    sh "docker stop anomaly_container || true"
-                    sh "docker rm anomaly_container || true"
-                    sh "docker run -d -p 8501:8501 --name anomaly_container ${DOCKERHUB_USER}/${IMAGE_NAME}:latest"
-                }
+                bat "docker stop anomaly_container || exit 0"
+                bat "docker rm anomaly_container || exit 0"
+                bat "docker run -d -p 8501:8501 --name anomaly_container %DOCKERHUB_USER%/%IMAGE_NAME%:latest"
             }
         }
-
     }
 
     post {
