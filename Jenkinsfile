@@ -10,6 +10,7 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
+                git branch: 'main',
                 git 'https://github.com/KISHANSINHAA/anomaly-detection-system.git'
             }
         }
